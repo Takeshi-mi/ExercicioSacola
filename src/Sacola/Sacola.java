@@ -1,6 +1,7 @@
 
 package Sacola;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.PriorityQueue;
@@ -15,25 +16,30 @@ public class Sacola {
     Stack<Integer> Pilha = new Stack<>();  
     Queue<Integer> Fila = new LinkedList<>();
     PriorityQueue<Integer> FilaPrioridade = new PriorityQueue<>();
-    int numOperacoes;
-    int op;
     int elemento;
+    //Cores
+    String azul = "\u001B[34m";
+    String vermelho = "\u001B[31m";
+    String amarelo = "\u001B[43m";
+    String reset = "\u001B[m";
      //Começa tudo como verdadeiro e eu vou validando depois. No final é só fazer a verificação lógica.
-    boolean podeSerFilaPrioridade = true; 
-    boolean podeSerPilha = true;
+    boolean eUmaPilha = true;
     boolean PodeSerFila = true;
+    boolean eUmaFilaPrioridade = true;
     
     
     Scanner entrada = new Scanner(System.in); // Para receber as entradas. Pode receber NextInt, nextLine e nextFloat.
-    System.out.print("Quantas operações deseja fazer?  ");
-    numOperacoes = entrada.nextInt();
+    System.out.print("Quantas operacoes deseja fazer?  ");
+    int numOperacoes = entrada.nextInt();
     for (int i = 0; i < numOperacoes; i++) {
-        System.out.println("Opções: \n1-INSERIR \n2-R=REMOVER ");
-        System.out.print("Sua opção:  ");
-        op = entrada.nextInt();
+        System.out.println(amarelo + "Opcoes:     ");
+        System.out.println(amarelo+ "1-INSERIR    ");
+        System.out.println(amarelo+ "2-REMOVER" + reset);
+        System.out.print(">>>Sua opcao:  ");
+        int op = entrada.nextInt();
         
         while (op <1 || op > 2){
-            System.out.println("Opção inválida. Digite 1 ou 2:  ");
+            System.out.println(vermelho+ "Opcao invalida. Digite 1 ou 2:  " + reset);
             op = entrada.nextInt();
             
         }
@@ -42,23 +48,29 @@ public class Sacola {
             System.out.print("Insira um elemento na sacola:  ");
             elemento = entrada.nextInt();
             while(elemento < 0 || elemento > 100){
-                System.out.println("O número tem que ser positivo e menor que 100.");
+                System.out.println(vermelho + "O numero tem que ser positivo e menor que 100." + reset);
                 System.out.print("Digite novamente:  ");
                 elemento  = entrada.nextInt();
             }
-            if (podeSerPilha) Pilha.push(elemento);
+            if (eUmaPilha) Pilha.push(elemento);
             if (PodeSerFila) Fila.add(elemento);
-            if (podeSerFilaPrioridade) FilaPrioridade.add(elemento);
+            if (eUmaFilaPrioridade) FilaPrioridade.add(elemento);
+            //Printar a sacola    
+                System.out.println(azul + "CONTEUDO DA SACOLA" + reset);
+                for (int k: Fila){
+                    System.out.print(" | "+ azul + k + reset +" | ");
+                }
+                System.out.println(" ");
+                
         } else {
             if(Pilha.empty()){
-                System.out.println("A sacola está vazia, não há nada para remover. Gastou uma operação."); 
+                System.out.println(vermelho + "A sacola está vazia, nao ha nada para remover. Gastou uma operacao." + reset); 
             } else{
             System.out.print("Remova um elemento na sacola:  ");
             elemento = entrada.nextInt();
-            
-            
+  
             if (Pilha.peek() != elemento) //Peek(espiar) olha o elemento mais recente da lista sem removê-lo
-                podeSerPilha = false;
+                eUmaPilha = false;
             else
                 Pilha.pop();
 
@@ -68,26 +80,31 @@ public class Sacola {
                 Fila.poll(); 
 
             if (FilaPrioridade.peek() != elemento)
-                podeSerFilaPrioridade = false;
+                eUmaFilaPrioridade = false;
             else
                 FilaPrioridade.poll(); // Remove o maior elemento
             }
+            //Printar a sacola    
+                System.out.println(azul + "CONTEUDO DA SACOLA" + reset);
+                for (int k: Fila){
+                    System.out.print(" | "+ azul + k + reset +" | ");
+                }
+                System.out.println(" ");
         }
-    }
-    if (podeSerPilha && !PodeSerFila && !podeSerFilaPrioridade)
+    } 
+    if (eUmaPilha && !PodeSerFila && !eUmaFilaPrioridade)
         System.out.println("\nÉ definitivamente uma pilha.");
-    else if (!podeSerPilha && PodeSerFila && !podeSerFilaPrioridade)
+    else if (!eUmaPilha && PodeSerFila && !eUmaFilaPrioridade)
         System.out.println("\nÉ definitivamente uma fila.");
-    else if (!podeSerPilha && !PodeSerFila && podeSerFilaPrioridade)
+    else if (!eUmaPilha && !PodeSerFila && eUmaFilaPrioridade)
         System.out.println("\nÉ definitivamente uma fila de priporidade.");
-    else if (!podeSerPilha && !PodeSerFila && !podeSerFilaPrioridade)
+    else if (!eUmaPilha && !PodeSerFila && !eUmaFilaPrioridade)
         System.out.println("\nÉ impossível. Não pode ser uma pilha, uma fila ou uma fila de prioridade.");
     else{
-        System.out.println("Não dá pra ter certeza. "); // Quando caia em outro caso sem ser esses de cima ficava em branco. 
+        System.out.println("Nao dapra ter certeza. "); // Quando caia em outro caso sem ser esses de cima ficava em branco. 
     }
-
     System.out.println("\nFim do programa.");
-
+    
 
         
 } 
