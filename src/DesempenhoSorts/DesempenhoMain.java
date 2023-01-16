@@ -22,16 +22,16 @@ public class DesempenhoMain {
         int[] sizes = {10, 1000, 10000, 100000, 1000000};
         for (int size : sizes) {
             int[] array = ArrayAleatorio(size);
-            //System.out.println(Arrays.toString(array));
+            System.out.println(Arrays.toString(array));
 
             System.out.println(String.format("\u001B[32mTamanho do vetor:   | %,d |", size)); // %,d formata o número para decimal, deixando mais legível. 1.000.000
             System.out.println("\u001B[32m| Metodos |       | Tempo de execucao |" );
-            System.out.println("Bubble Sort:         " + OrdenarEMedirTempo(array, Metodos::bubbleSort));
-            System.out.println("Insertion Sort:      " + OrdenarEMedirTempo(array, Metodos::insertionSort));
-            System.out.println("Selection Sort:      " + OrdenarEMedirTempo(array, Metodos::selectionSort));
-            System.out.println("Merge Sort:          " + OrdenarEMedirTempo(array, Metodos::mergeSort));
-            System.out.println("Quick Sort:          " + OrdenarEMedirTempo(array, Metodos::quickSort));
-            System.out.println("Shell Sort:          " + OrdenarEMedirTempo(array, Metodos::simpleShellSort));
+            System.out.println(String.format("Bubble Sort:         %,d",  OrdenarEMedirTempo(array, Metodos::bubbleSort)));
+            System.out.println(String.format("Insertion Sort:      %,d",  OrdenarEMedirTempo(array, Metodos::insertionSort)));
+            System.out.println(String.format("Selection Sort:      %,d",OrdenarEMedirTempo(array, Metodos::selectionSort)));
+            System.out.println(String.format("Merge Sort:          %,d",  OrdenarEMedirTempo(array, Metodos::mergeSort)));
+            System.out.println(String.format("Quick Sort:          %,d" ,OrdenarEMedirTempo(array, Metodos::quickSort)));
+            System.out.println(String.format("Shell Sort:          %,d" , OrdenarEMedirTempo(array, Metodos::simpleShellSort)));
             System.out.println();
         }
     }
@@ -48,9 +48,9 @@ public class DesempenhoMain {
     // Este método mede o tempo de execução de um algoritmo de ordenação. Pra usar ele passei 
     private static long OrdenarEMedirTempo(int[] array, Funcoes funcoes) {
         int[] copy = Arrays.copyOf(array, array.length);
-        long inicio = System.currentTimeMillis();  //Long é tipo um int, mas guarda números maiores. (Às vezes eu comento pra mim mesmo entender, Professora)
+        long inicio = System.nanoTime();  //Long é tipo um int, mas guarda números maiores. (Às vezes eu comento pra mim mesmo entender, Professora)
         funcoes.func(copy);
-        long fim = System.currentTimeMillis();
+        long fim = System.nanoTime();
         return fim - inicio;
     }
     
