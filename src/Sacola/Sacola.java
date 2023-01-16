@@ -77,17 +77,17 @@ public class Sacola {
             System.out.print("Remova um elemento na sacola:  ");
             elemento = entrada.nextInt();
   
-            if (Pilha.empty() || Pilha.peek() != elemento) //Peek(espiar) olha o elemento mais recente da lista sem removê-lo
+            if (Pilha.peek() != elemento) //Peek(espiar) olha o elemento mais recente da lista sem removê-lo
                 eUmaPilha = false;
             else
                 Pilha.pop();
 
-            if (Fila.isEmpty() || Fila.peek() != elemento)
+            if (Fila.peek() != elemento)
                 PodeSerFila = false;
             else
                 Fila.remove(); 
 
-            if (FilaPrioridade.isEmpty() || FilaPrioridade.peek() != elemento)
+            if (FilaPrioridade.peek() != elemento)
                 eUmaFilaPrioridade = false;
             else
                 FilaPrioridade.poll(); // Remove o maior elemento

@@ -5,7 +5,6 @@ package DesempenhoSorts;
  * @author Takeshi
  */
 
-import DesempenhoSorts.Metodos.*; // Importei todos os métodos presentes nessa classe
 import java.util.Arrays;
 
 
@@ -23,6 +22,8 @@ public class DesempenhoMain {
         int[] sizes = {10, 1000, 10000, 100000, 1000000};
         for (int size : sizes) {
             int[] array = ArrayAleatorio(size);
+            //System.out.println(Arrays.toString(array));
+
             System.out.println(String.format("\u001B[32mTamanho do vetor:   | %,d |", size)); // %,d formata o número para decimal, deixando mais legível. 1.000.000
             System.out.println("\u001B[32m| Metodos |       | Tempo de execucao |" );
             System.out.println("Bubble Sort:         " + OrdenarEMedirTempo(array, Metodos::bubbleSort));
