@@ -1,5 +1,9 @@
 
 package Sacola;
+/**
+ *
+ * @author Takeshi
+ */
 
 import java.util.Arrays;
 import Sacola.Fila;
@@ -29,6 +33,7 @@ public class Sacola {
     boolean eUmaPilha = true;
     boolean PodeSerFila = true;
     boolean eUmaFilaPrioridade = true;
+    boolean impossivel = true;
     
     
     Scanner entrada = new Scanner(System.in); // Para receber as entradas. Pode receber NextInt, nextLine e nextFloat.
@@ -116,17 +121,18 @@ public class Sacola {
     if (eUmaPilha == true && PodeSerFila == false && eUmaFilaPrioridade == false)
         System.out.println("\nÉ definitivamente uma pilha.");
     
-    else if (!eUmaPilha && PodeSerFila && !eUmaFilaPrioridade)
+    else if (eUmaPilha == false && PodeSerFila == true && eUmaFilaPrioridade == false)
         System.out.println("\nÉ definitivamente uma fila.");
     
-    else if (!eUmaPilha && !PodeSerFila && eUmaFilaPrioridade)
+    else if (eUmaPilha == false && PodeSerFila == false && eUmaFilaPrioridade == true)
         System.out.println("\nÉ definitivamente uma fila de priporidade.");
     
-    else if (!eUmaPilha && !PodeSerFila && !eUmaFilaPrioridade)
+    else if (eUmaPilha == false && PodeSerFila == false && eUmaFilaPrioridade == false)
         System.out.println("\nÉ impossível. Não pode ser uma pilha, uma fila ou uma fila de prioridade.");
     
     else{
-        System.out.println("Nao da pra ter certeza. "); // Quando caia em outro caso sem ser esses de cima ficava em branco. 
+        System.out.println("Nao da pra ter certeza. "); // Se for mais de um ao mesmo tempo ele fica incerto. Decidi colocar esse campo mesmo
+        //você tendo tirado porque quando eu rodava ficava em branco. 
     }
 
     System.out.println("\nFim do programa.");
